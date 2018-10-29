@@ -173,7 +173,7 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
     AFSecurityPolicy *securityPolicy = [[self alloc] init];
     securityPolicy.SSLPinningMode = AFSSLPinningModeNone;
 
-    return securityPolicy;
+    return [securityPolicy copy];
 }
 
 + (instancetype)policyWithPinningMode:(AFSSLPinningMode)pinningMode {

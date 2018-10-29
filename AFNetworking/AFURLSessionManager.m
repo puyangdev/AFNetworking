@@ -1002,7 +1002,8 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
         disposition = self.sessionDidReceiveAuthenticationChallenge(session, challenge, &credential);
     } else {
         if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
-            if ([self.securityPolicy evaluateServerTrust:challenge.protectionSpace.serverTrust forDomain:challenge.protectionSpace.host]) {
+            __strong typeof(self)strongSelf = self;
+            if ([strongSelf.securityPolicy evaluateServerTrust:challenge.protectionSpace.serverTrust forDomain:challenge.protectionSpace.host]) {
                 credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
                 if (credential) {
                     disposition = NSURLSessionAuthChallengeUseCredential;
